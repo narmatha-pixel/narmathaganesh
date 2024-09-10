@@ -4,61 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="C:\Users\IT_USER79\Documents\todolist\public\css\styles.css">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        ul { list-style-type: none; padding: 0; }
-        li { padding: 10px; border-bottom: 1px solid #ccc; }
-        .completed { text-decoration: line-through; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <input type="text" id="new-task" placeholder="New task...">
-    <button onclick="addTodo()">Add</button>
-    <ul id="todo-list"></ul>
-    <script src="C:\Users\IT_USER79\Documents\todolist\public\js\script.js"></script>
+    <div class="todo-container">
+        <h2>To-Do List </h2>
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Add your task">
+            <button type="submit">ADD</button>
+        </form>
+        <ul id="task-list" class="task-list"></ul>
+    </div>
+
     <script>
-        async function fetchTodos() {
-            const response = await fetch('/api/todos');
-            const todos = await response.json();
-            const todoList = document.getElementById('todo-list');
-            todoList.innerHTML = '';
-            todos.forEach(todo => {
+        // Array to hold tasks
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        // Function to render tasks
+        function renderTasks() {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = ''; // Clear the list
+
+            tasks.forEach((task, index) => {
                 const li = document.createElement('li');
-                li.textContent = todo.task;
-                li.className = todo.completed ? 'completed' : '';
-                li.onclick = () => toggleTodoCompletion(todo.id);
-                todoList.appendChild(li);
+
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = task;
+                li.appendChild(taskSpan);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '×';
+                deleteButton.className = 'delete-btn';
+                deleteButton.addEventListener('click', () => {
+                    deleteTask(index);
+                });
+                li.appendChild(deleteButton);
+
+                taskList.appendChild(li);
             });
         }
 
-        async function addTodo() {
-            const taskInput = document.getElementById('new-task');
-            const task = taskInput.value;
+        // Function to add a task
+        function addTask(task) {
             if (task) {
-                await fetch('/api/todos', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task }),
-                });
-                taskInput.value = '';
-                fetchTodos();
+                tasks.push(task);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderTasks();
             }
         }
 
-        async function toggleTodoCompletion(id) {
-            const todo = await fetch(/api/todos/${id}).then(res => res.json());
-            await fetch(/api/todos/${id}, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ completed: !todo.completed }),
-            });
-            fetchTodos();
+        // Function to delete a task
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
         }
 
-        // Fetch and display todos on load
-        fetchTodos();
+        // Handle form submission
+        document.getElementById('task-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting
+            const taskInput = document.getElementById('task-input');
+            addTask(taskInput.value);
+            taskInput.value = ''; // Clear the input
+        });
+
+        // Initial rendering of tasks
+        renderTasks();
     </script>
 </body>
 </html>
