@@ -2,77 +2,181 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
     background-color: #333;
     color: white;
-    padding: 10px 0;
+    padding: 1rem;
     text-align: center;
 }
 
-header nav a {
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+header nav button {
+    background-color: #333;
+    border: none;
     color: white;
-    padding: 14px 20px;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-header nav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-section {
-    padding: 20px;
-}
-
-form {
-    background-color: white;
-    padding: 20px;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="file"], textarea {
+header nav button:hover {
+    background-color: #333;
+}
+
+/* Hidden Section Styling */
+.hidden {
+    display: none;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
-    padding: 10px;
-    margin: 5px 0 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    max-width: 400px;
+    margin: auto;
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #5cb85c;
+form input, form textarea, form select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    background-color:  #28a745;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 0.5rem;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color:  #28a745;
+}
+
+/* Product Card Styling */
+.product-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 100px;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart-btn {
+    background-color:  #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align:left;
+}
+
+.add-to-cart-btn:hover {
+    background-color:  #28a745;
+}
+
+/* Cart Section Styling */
+#cart-section {
+    padding: 1rem;
+}
+
+.cart-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+    max-width: 100px;
+    margin-bottom: 1rem;
+}
+
+.quantity-btn {
+    background-color:  #333;
+    color: white;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 0 0.2rem;
+}
+
+.quantity-btn:hover {
+    background-color:  #333;
+}
+
+#proceedToCheckout {
+    background-color:  #28a745;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+}
+
+#proceedToCheckout:hover {
+    background-color:  #28a745;
+}
+
+/* Order Section Styling */
+#order-section {
+    padding: 1rem;
+}
+
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 400px;
+    margin: auto;
+}
+
+#orderForm select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* General Button Styling */
+button {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color:  #28a745;
+
 }
 
 button:hover {
-    background-color: #4cae4c;
-}
-
-.product-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.product-list div {
-    background-color: white;
-    margin: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    text-align: center;
-}
-
-.product-list img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    background-color:  #28a745;
+    color: white;
 }
